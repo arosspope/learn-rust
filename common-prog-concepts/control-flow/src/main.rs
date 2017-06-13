@@ -68,7 +68,6 @@ fn for_loop() {
         println!("the value is: {}", element);
     }
 
-
     //`.rev()` reverses the range
     for number in (1..4).rev() {
         println!("{}!", number);

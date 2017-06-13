@@ -32,22 +32,19 @@ fn compound_types() {
 fn basic_types(){
     //Rust is a statically typed language which means it must know the types of all variables at compile time
 
-    /*
-    Scalar types represent a single value. Rust has four primary types:
-        - integer
-        - boolean
-        - floating-point
-        - chars
-    */
+    // Scalar types represent a single value. Rust has four primary types:
+    //     - integer
+    //     - boolean
+    //     - floating-point
+    //     - chars
 
-    /*
-    Integers length/types include:
-        - 8bit: i8, u8
-        - 16bit: i16, u16
-        - 32bit: ...
-        - 64bit: ...
-        - arch: isize, usize
-    */
+    // Integers length/types include:
+    //     - 8bit: i8, u8
+    //     - 16bit: i16, u16
+    //     - 32bit: ...
+    //     - 64bit: ...
+    //     - arch: isize, usize
+
 
     //All number literals (expect the byte literal) allow a type suffix:
     let x = 57u8;
@@ -61,17 +58,16 @@ fn basic_types(){
     //The primary situation in which you’d use isize or usize is when indexing some sort of collection.
 
     //Floating point (default is f64)
-    let x = 2.0; //f64
-    let y: f32 = 3.0; //f32
+    let x = 2.0;        //f64
+    let y: f32 = 3.0;   //f32
 
     //Booleans
     let x = true;
-    //or
     let y: bool = false;
 
     //Characters
     let c = 'z';
-    let face = '😃'; //supports Unicode
+    let face: char = '😃'; //supports Unicode
     println!("The value of face is: {}", face);
     println!();
 }
