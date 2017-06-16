@@ -19,7 +19,8 @@ fn simple_slice() {
     println!("{} {}", hello, world);
 }
 
-fn first_word(s: &String) -> &str {
+//Using &str instead of &String as it allows us to use te founction for both types
+fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
 
     for (i, &item) in bytes.iter().enumerate() {
