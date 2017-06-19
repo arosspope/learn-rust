@@ -19,6 +19,9 @@ fn simple_slice() {
     println!("{} {}", hello, world);
 }
 
+//if we changed the below signature to
+//fn first_word(s: &str) -> &str {
+//it would allow us to use this function for both types
 fn first_word(s: &String) -> &str {
     let bytes = s.as_bytes();
 
