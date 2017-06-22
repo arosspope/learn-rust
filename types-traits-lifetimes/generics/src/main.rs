@@ -6,10 +6,27 @@ struct Point<T> {
     y: T,
 }
 
+//generic with two different types
+struct DifferentPoint<T, U>{
+    x: T,
+    y: U
+}
+
 //Implementing generic method for generic struct
-impl<T> Point<T> {
+impl<T> Point<T> { //notice we have to declare `T` after `impl`, so that we can use it when we specify that we're implementing methods on the type Point<T>
     fn x(&self) -> &T {
         &self.x
+    }
+}
+
+//consider this mixup method
+impl<T, U> DifferentPoint<T, U> {
+    //Notice that the method must define the type constansts used in the fn paramaters
+    fn mixup<V, W>(self, other: DifferentPoint<V, W>) -> DifferentPoint<T, W> {
+        DifferentPoint {
+            x: self.x,
+            y: other.y,
+        }
     }
 }
 
@@ -18,6 +35,15 @@ fn main() {
     let p1 = Point {x: 1, y: 2};
     let p2 = Point {x: 1.0, y: 3.0};
     //let p3 = Point {x: 2, y: 4.5}; - Would not work as the types are dissimilar
+    let p3 = DifferentPoint {x: 2, y: 4.5}; //Okay!
+    let p4 = DifferentPoint {x: "spicy", y: 0}; //Okay!
+    let p5 = p4.mixup(p3); //x: "spicy", y: 4.5
+
+    let numbers = vec![1, 2, 5, 10];
+    let chars = vec!['y', 'm', 'a', 'q'];
+
+    println!("p1.x = {}", p1.x());
+
 }
 
 //Generic function finding the largest 'thing' from a list
@@ -25,30 +51,7 @@ fn largest<T>(list: &[T]) -> T {
     let mut largest = list[0];
 
     for &item in list.iter() {
-        //Implement code to find largest thing
-    }
-
-    largest
-}
-
-//Without a generics, it would be pretty frustrating to find the largest 'thing'
-fn largest_i32(list: &[i32]) -> i32 {
-    let mut largest = list[0];
-
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-
-    largest
-}
-
-fn largest_char(list: &[char]) -> char {
-    let mut largest = list[0];
-
-    for &item in list.iter() {
-        if item > largest {
+        if item > largest { //This will not compile as we need to implement the PartialOrd trait
             largest = item;
         }
     }
