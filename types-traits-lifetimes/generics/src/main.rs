@@ -42,16 +42,19 @@ fn main() {
     let numbers = vec![1, 2, 5, 10];
     let chars = vec!['y', 'm', 'a', 'q'];
 
+    println!("largest number: {}", largest(&numbers));
+    println!("largest char: {}", largest(&chars));
     println!("p1.x = {}", p1.x());
 
 }
 
 //Generic function finding the largest 'thing' from a list
-fn largest<T>(list: &[T]) -> T {
+//Only allowed for types that implement PartialOrd and Copy (trait bounding a generic method)
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     let mut largest = list[0];
 
     for &item in list.iter() {
-        if item > largest { //This will not compile as we need to implement the PartialOrd trait
+        if item > largest {
             largest = item;
         }
     }
